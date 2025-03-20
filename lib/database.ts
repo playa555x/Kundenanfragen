@@ -1,4 +1,4 @@
-export async function executeQuery(query: string, params: (string | number | boolean | null)[] = []) {
+export async function executeQuery(query: string, params: (string | number | boolean | null | Date | undefined)[] = []) {
   try {
     const apiUrl = process.env.NILE_API_URL
     const apiKey = process.env.NILE_API_KEY
@@ -406,7 +406,7 @@ export async function initializeDatabase() {
 
 // Dummy pool for compatibility with code that directly imports pool
 export const pool = {
-  query: async (text: string, params: any[] = []) => {
+  query: async (text: string, params: (string | number | boolean | null | Date | undefined)[] = []) => {
     return executeQuery(text, params)
   },
 }
