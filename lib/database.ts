@@ -1,4 +1,4 @@
-export async function executeQuery(query: string, params: any[] = []) {
+export async function executeQuery(query: string, params: (string | number | boolean | null)[] = []) {
   try {
     const apiUrl = process.env.NILE_API_URL
     const apiKey = process.env.NILE_API_KEY
@@ -176,7 +176,7 @@ export async function getDiagramSettings(customerId: number) {
   return result.rows.length > 0 ? result.rows[0] : null
 }
 
-export async function updateDiagramSettings(customerId: number, settings: Partial<DiagramSettings>) {
+export async function updateDiagramSettings(customerId: number, settings: Partial<Omit<DiagramSettings, 'id' | 'customer_id' | 'created_at' | 'updated_at'>>) {
   // Check if settings exist
   const existing = await getDiagramSettings(customerId)
 
